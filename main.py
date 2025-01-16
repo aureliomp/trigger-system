@@ -1,13 +1,25 @@
 from typing import Union
-
+# import config
 from fastapi import FastAPI
 
-app = FastAPI()
+# create database structure  function
+from scripts.create import DataBase
+from scripts.create import DataBase
+from scripts.create import Triggers
+from scripts.create import Tables
+from scripts.create import Procedures
+# insert  data into database functions
+from scripts.insertions import Media
+from scripts.insertions import Enclosure
+from scripts.insertions import Settings
 
-""" 
-python3 -m venv .venv
-source .venv/bin/activate
-"""
+
+from pydantic import  BaseModel
+
+class DataBases(BaseModel):
+    name: str
+
+app = FastAPI()
 
 @app.get("/")
 def read_root():
@@ -64,6 +76,20 @@ def load_info():
     '''
 }
 
-@app.get('/all-pokemon')
-def  readAll():
-    return 'todos los pokemones'
+@app.post('/create-structure')
+async def data(data: DataBases):
+    await DataBase.create(data.name)
+    await Tables.create(data.name)
+    await Triggers.create(data.name) 
+    await Procedures.create(data.name)
+    return { 'success': True }
+    # return { 'tables':tables }
+    
+@app.post('/insert-data')
+async def  data(data: DataBases):
+    await Media.insert(data.name)
+    await Enclosure.insertions(data.name)
+    await Settings.insertions(data.name)
+    return {"status":True}
+    
+# end def

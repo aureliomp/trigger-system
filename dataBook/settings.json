@@ -1,0 +1,598 @@
+{
+    "actions": [
+        {
+            "name": "Lectura",
+            "description": "Lectura"
+        },
+        {
+            "name": "Escritura",
+            "description": "Escritura"
+        },
+        {
+            "name": "Actualizacion",
+            "description": "Actualizacion"
+        }
+    ],
+    "billConcepts": [
+        {
+            "name": "SEGURIDAD PRIVADA",
+            "description": "SEGURIDAD PRIVADA",
+            "isActive": 1
+        },
+        {
+            "name": "PERSONAL DE INTENDENCIA",
+            "description": "PERSONAL DE INTENDENCIA",
+            "isActive": 1
+        },
+        {
+            "name": "PARAMEDICOS",
+            "description": "PARAMEDICOS",
+            "isActive": 1
+        },
+        {
+            "name": "VENTA DE ALIMENTOS",
+            "description": "VENTA DE ALIMENTOS",
+            "isActive": 1
+        },
+        {
+            "name": "VENTA DE REFRESCOS",
+            "description": "VENTA DE REFRESCOS",
+            "isActive": 1
+        },
+        {
+            "name": "VENTA DE BEBIDAS ALCHOLICAS",
+            "description": "VENTA DE BEBIDAS ALCHOLICAS",
+            "isActive": 1
+        },
+        {
+            "name": "VENDER SALCHIPAPAS",
+            "description": "ACCION DE VENDER SALCHIPAPAS",
+            "isActive": 1
+        },
+        {
+            "name": "VENTA DE AGUACHILE",
+            "description": "DESCRIPCION DE AGUACHILE",
+            "isActive": 1
+        },
+        {
+            "name": "",
+            "description": "",
+            "isActive": 1
+        },
+        {
+            "name": "COMPRA DE CERVEZA",
+            "description": "DESCRIPCION DE CERVEZA",
+            "isActive": 1
+        }
+    ],
+    "eventClasifications": [
+        {
+            "name": "Deportivo",
+            "description": "deportivo",
+            "isActive": 1
+        },
+        {
+            "name": "Cultural",
+            "description": "Cultural",
+            "isActive": 1
+        },
+        {
+            "name": "Caridad",
+            "description": "Caridad",
+            "isActive": 1
+        },
+        {
+            "name": "test1",
+            "description": "test desc",
+            "isActive": 0
+        },
+        {
+            "name": " Concierto M ",
+            "description": "de clasificasion",
+            "isActive": 0
+        },
+        {
+            "name": "Fiesta P rivada",
+            "description": "sin",
+            "isActive": 0
+        },
+        {
+            "name": "CONCIERTO",
+            "description": "Concierto Luis Miguel",
+            "isActive": 0
+        },
+        {
+            "name": "Conciertos ",
+            "description": "Eventos de musica ",
+            "isActive": 0
+        },
+        {
+            "name": "MASIVO",
+            "description": "Evento con más de 20,000 personas",
+            "isActive": 1
+        },
+        {
+            "name": "Micro",
+            "description": "100 personas maximo",
+            "isActive": 1
+        }
+    ],
+    "fees": [
+        {
+            "name": "ComisionPasarelaPorcentaje",
+            "value": 4.3,
+            "typeFees": "PERCENT",
+            "title": "ComisionPasarelaPorcentaje",
+            "subtitle": "ComisionPasarelaPorcentaje",
+            "description": "comisión que se cobra en porcentaje de la pasarela",
+            "typeApplication": "AMOUNT",
+            "forced": 1,
+            "isActive": 1,
+            "idGroup": 2
+        },
+        {
+            "name": "ComisionPasarelaEfectivo",
+            "value": 5,
+            "typeFees": "CASH",
+            "title": "ComisionPasarelaEfectivo",
+            "subtitle": "ComisionPasarelaEfectivo",
+            "description": "ComisionPasarelaEfectivo",
+            "typeApplication": "AMOUNT",
+            "forced": 1,
+            "isActive": 1,
+            "idGroup": 2
+        },
+        {
+            "name": "ELECTRONIC TICKET",
+            "value": 50,
+            "typeFees": "CASH",
+            "title": "ELECTRONIC TICKET",
+            "subtitle": "obtener tickets y descargar tickets",
+            "description": "Descarga tus boletos en el sitio oficial o por medio de tu correo electrónico",
+            "typeApplication": "TICKET",
+            "forced": 0,
+            "isActive": 1,
+            "idGroup": 1
+        },
+        {
+            "name": "entrega PICK-UP",
+            "value": 80,
+            "typeFees": "CASH",
+            "title": "PICK-UP",
+            "subtitle": "recoger en puntos de venta autorizados",
+            "description": "pasar  por tus boletos a taquilla o a cualquiera de nuestros puntos de venta autorizados",
+            "typeApplication": "TICKET",
+            "forced": 0,
+            "isActive": 1,
+            "idGroup": 1
+        },
+        {
+            "name": "Blindaje 360",
+            "value": 80,
+            "typeFees": "CASH",
+            "title": "Blindaje 360",
+            "subtitle": "Blindaje 360",
+            "description": "Te reembolsa el total de tus boletos en caso de no poder asistir al  evento.",
+            "typeApplication": "TICKET",
+            "forced": 0,
+            "isActive": 1,
+            "idGroup": 3
+        },
+        {
+            "name": "All access ",
+            "value": 20,
+            "typeFees": "PERCENT",
+            "title": "All access",
+            "subtitle": "All access",
+            "description": "Te da acceso a zonas exclusivas dentro del evento. ",
+            "typeApplication": "TICKET",
+            "forced": 0,
+            "isActive": 1,
+            "idGroup": 3
+        },
+        {
+            "name": "COBERTURA AMPLIA",
+            "value": 25.5,
+            "typeFees": "PERCENT",
+            "title": "COBERTURA AMPLIA",
+            "subtitle": "COBERTURA AMPLIA",
+            "description": "SECURO DE COBERTURA EN EL EVENTO ",
+            "typeApplication": "TICKET",
+            "forced": 0,
+            "isActive": 1,
+            "idGroup": 4
+        },
+        {
+            "name": "Pick Up",
+            "value": 50,
+            "typeFees": "CASH",
+            "title": "Pick Up",
+            "subtitle": "Entrega",
+            "description": "Entrega de boletos de forma presencial",
+            "typeApplication": "TICKET",
+            "forced": 0,
+            "isActive": 1,
+            "idGroup": 5
+        },
+        {
+            "name": "Mitad de precios",
+            "value": 50,
+            "typeFees": "PERCENT",
+            "title": "2x1",
+            "subtitle": "2x1",
+            "description": "Boletos a mitad de precio",
+            "typeApplication": "TICKET",
+            "forced": 0,
+            "isActive": 1,
+            "idGroup": 5
+        }
+    ],
+    "feesGroup": [
+        {
+            "name": "METODOS DE ENTREGA",
+            "description": "descripcion de metodo de entrega."
+        },
+        {
+            "name": "OTROS",
+            "description": "descripcion de otros"
+        },
+        {
+            "name": "BLINDAJE DE TICKET",
+            "description": "Protección extra del boleto "
+        },
+        {
+            "name": "SEGURO PLUS",
+            "description": "SEGURO"
+        },
+        {
+            "name": "Pick Up",
+            "description": "Entrega de boletos"
+        },
+        {
+            "name": "grupo test",
+            "description": "este es unn grupo de pruebas"
+        }
+    ],
+    "gateways": [
+        {
+            "name": "mercado_pago",
+            "description": "pasarela de pago de mercado pago",
+            "valuePercent": 3.49,
+            "valueCash": 4,
+            "isActive": 1,
+            "createAt": "2024-01-01",
+            "updateAt": "2024-01-01"
+        },
+        {
+            "name": "mercado_paypal",
+            "description": "pasarela de pago de paypal",
+            "valuePercent": 3.49,
+            "valueCash": 4,
+            "isActive": 1,
+            "createAt": "2024-01-01",
+            "updateAt": "2024-01-01"
+        },
+        {
+            "name": "taquilla_efectivo",
+            "description": "comision  de efectivo",
+            "valuePercent": 0,
+            "valueCash": 0,
+            "isActive": 1,
+            "createAt": "2024-01-01",
+            "updateAt": "2024-01-01"
+        },
+        {
+            "name": "taquilla_tarjeta",
+            "description": "comision  de tarjeta",
+            "valuePercent": 1.2,
+            "valueCash": 2,
+            "isActive": 1,
+            "createAt": "2024-01-01",
+            "updateAt": "2024-01-01"
+        },
+        {
+            "name": "inbropi_administrtive",
+            "description": "porcentaje administrativo de inbropi",
+            "valuePercent": 7,
+            "valueCash": 0,
+            "isActive": 1,
+            "createAt": "2024-09-27",
+            "updateAt": "2024-09-27"
+        }
+    ],
+    "modules": [
+        {
+            "name": "dashboard",
+            "description": "desc dashboard",
+            "isActive": 1,
+            "createAt": "2024-04-30"
+        },
+        {
+            "name": "compras",
+            "description": "compras",
+            "isActive": 1,
+            "createAt": "2024-04-30"
+        },
+        {
+            "name": "eventos",
+            "description": "eventos description",
+            "isActive": 1,
+            "createAt": "2024-05-08"
+        },
+        {
+            "name": "cliente espectador",
+            "description": "desc cliente espectador",
+            "isActive": 1,
+            "createAt": "2024-05-09"
+        },
+        {
+            "name": "notificaciones",
+            "description": "descripcion de notificaciones",
+            "isActive": 1,
+            "createAt": "2024-08-12"
+        },
+        {
+            "name": "compras2 test",
+            "description": "desc compras",
+            "isActive": 1,
+            "createAt": "2024-08-14"
+        },
+        {
+            "name": "MOD TEST AAAAA",
+            "description": "a",
+            "isActive": 0,
+            "createAt": "2024-08-19"
+        },
+        {
+            "name": "ASASS",
+            "description": "sss",
+            "isActive": 1,
+            "createAt": "2024-08-19"
+        },
+        {
+            "name": "FIESTA",
+            "description": "RP",
+            "isActive": 1,
+            "createAt": "2024-09-10"
+        }
+    ],
+    "permitions": [
+        {
+            "idModule": 1,
+            "idSubmodule": 2,
+            "idAction": 1,
+            "idUser": 1
+        },
+        {
+            "idModule": 1,
+            "idSubmodule": 2,
+            "idAction": 2,
+            "idUser": 1
+        },
+        {
+            "idModule": 1,
+            "idSubmodule": 1,
+            "idAction": 3,
+            "idUser": 1
+        },
+        {
+            "idModule": 1,
+            "idSubmodule": 1,
+            "idAction": 1,
+            "idUser": 1
+        },
+        {
+            "idModule": 2,
+            "idSubmodule": null,
+            "idAction": 2,
+            "idUser": 1
+        },
+        {
+            "idModule": 11,
+            "idSubmodule": 12,
+            "idAction": 1,
+            "idUser": 1
+        }
+    ],
+    "rolePermitions": [
+        {
+            "idRol": 1,
+            "idPermition": 1
+        },
+        {
+            "idRol": 1,
+            "idPermition": 2
+        },
+        {
+            "idRol": 1,
+            "idPermition": 3
+        },
+        {
+            "idRol": 1,
+            "idPermition": 4
+        },
+        {
+            "idRol": 1,
+            "idPermition": 5
+        },
+        {
+            "idRol": 5,
+            "idPermition": 6
+        }
+    ],
+    "roles": [
+        {
+            "name": "super admin",
+            "descrition": " rol de super admin",
+            "isActive": 1,
+            "createAt": "2024-04-30"
+        },
+        {
+            "name": "Test rol",
+            "descrition": "Rol de prueba",
+            "isActive": 1,
+            "createAt": "2024-08-12"
+        },
+        {
+            "name": "Supervisor test",
+            "descrition": "desc2",
+            "isActive": 1,
+            "createAt": "2024-08-14"
+        },
+        {
+            "name": "Pruebas ",
+            "descrition": "pruebas",
+            "isActive": 1,
+            "createAt": "2024-08-15"
+        },
+        {
+            "name": "Taquilla ",
+            "descrition": "Solo para vender boletos",
+            "isActive": 1,
+            "createAt": "2024-11-05"
+        }
+    ],
+    "stages": [
+        {
+            "name": "time_expiration",
+            "descrition": " tiempo de expiracion en dias para la transaccion de mercado pago ",
+            "value": "1",
+            "createAt": "2024-06-21",
+            "isActive": 1
+        },
+        {
+            "name": "payment_gateway",
+            "descrition": "pasarela de pagos seleccionada",
+            "value": "mercado_pago",
+            "createAt": "2024-06-21",
+            "isActive": 1
+        },
+        {
+            "name": "payment_gateway",
+            "descrition": "pasarela de pagos seleccionada",
+            "value": "paypal",
+            "createAt": "2024-06-21",
+            "isActive": 1
+        },
+        {
+            "name": "time_zone",
+            "descrition": "zona horaria para la plataforma de CTM y microservicios",
+            "value": "America/Mexico_city",
+            "createAt": "2024-01-02",
+            "isActive": 1
+        }
+    ],
+    "submodules": [
+        {
+            "name": "compra boleto",
+            "descrition": " descripcion ",
+            "isActive": 1,
+            "createAt": "2024-04-30",
+            "idModule": 1,
+            "idUser": 1
+        },
+        {
+            "name": "creacion de boletos",
+            "descrition": "creacion de boletos",
+            "isActive": 1,
+            "createAt": "2024-04-30",
+            "idModule": 1,
+            "idUser": 1
+        },
+        {
+            "name": "test1",
+            "descrition": "test1",
+            "isActive": 1,
+            "createAt": null,
+            "idModule": 4,
+            "idUser": 1
+        },
+        {
+            "name": "sub1",
+            "descrition": "desc sub 1",
+            "isActive": 1,
+            "createAt": "2024-08-14",
+            "idModule": 8,
+            "idUser": 5
+        },
+        {
+            "name": "wqwq",
+            "descrition": "wq",
+            "isActive": 1,
+            "createAt": "2024-08-14",
+            "idModule": 2,
+            "idUser": 5
+        },
+        {
+            "name": "SDFSDFS",
+            "descrition": "sdfsdfs",
+            "isActive": 0,
+            "createAt": "2024-08-15",
+            "idModule": 8,
+            "idUser": 3
+        },
+        {
+            "name": "A",
+            "descrition": "s",
+            "isActive": 0,
+            "createAt": "2024-08-19",
+            "idModule": 9,
+            "idUser": 3
+        },
+        {
+            "name": "F1",
+            "descrition": "a",
+            "isActive": 1,
+            "createAt": "2024-08-19",
+            "idModule": 7,
+            "idUser": 3
+        },
+        {
+            "name": "TRAGO",
+            "descrition": "para motivar la venta",
+            "isActive": 1,
+            "createAt": "2024-09-10",
+            "idModule": 8,
+            "idUser": 1
+        }
+    ],
+    "tickets": [
+        {
+            "name": "DIAMANTE",
+            "descrition": "ZONA DIAMANTE",
+            "path": null,
+            "idEnclosure": 1,
+            "availableSeats": 249,
+            "isActive": 1,
+            "idSection": 1
+        },
+        {
+            "name": "PERS. CON DISCAPACIDAD",
+            "descrition": "ZONA ESPECIAL PARA PERSONAS CON DISCAPACIDAD",
+            "path": null,
+            "idEnclosure": 1,
+            "availableSeats": 6,
+            "isActive": 1,
+            "idSection": 2
+        }
+    ],
+    "users": [
+        {
+            "id":1,
+            "name": "pruebas",
+            "lastname": "develop",
+            "lastname2": "",
+            "email": "aurelio.murillo@trocut.com",
+            "password": "$2b$10$0ggMzRnEa3gmQPJ9..yXH.ELaMtQFcDbzEWEXPvuIMYVdoEGxwRii",
+            "phoneNumber": 123456789987,
+            "idRol": 1,
+            "isActive": 1,
+            "createAt": "2024-01-01",
+            "isResetPassword": 0,
+            "userType": "ADMIN",
+            "idFan": 1
+        }
+    ]
+}
+
+

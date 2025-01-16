@@ -1,0 +1,28 @@
+@port = 8000
+@baseUrl = http://127.0.0.1:{{port}}
+
+### get info
+GET {{baseUrl}} HTTP/1.1
+
+
+#### create database structure 
+POST {{baseUrl}}/create-structure HTTP/1.1
+Content-Type: application/json
+
+{
+    "name":"test_scripts"
+}
+
+
+### insert database information basic
+POST {{baseUrl}}/insert-data HTTP/1.1
+Content-Type: application/json
+
+{
+    "name":"test_scripts"
+}
+
+
+
+
+
