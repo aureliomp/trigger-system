@@ -17,8 +17,7 @@ async def create(nameNewDatabase):
     )
     cursor = cnx.cursor()
 
-    cursor.execute(query)
-
+    cursor.execute(query,multi=True)
     cursor.close()
     cnx.close()
     return 'success'

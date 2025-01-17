@@ -66,51 +66,12 @@ async def fillMainTables(nameDataBase):
             '''
             val = (stage['name'], stage['descrition'], stage['value'], stage['createAt'],stage['isActive'])
             cursor.execute(query_stage,val)
-
-        """
-        for  permition in jsonData['permitions']:
-            query_permition = '''  
-                INSERT INTO settings_permitions (id_module, id_submodule, id_action, id_user)
-                VALUES (%s, %s, %s, %s);
-            '''
-            val = (permition['idModule'], permition['idSubmodule'], permition['idAction'], permition['idUser'])
-            print(query_permition,val)
-            cursor.execute(query_permition,val)
-        
-        
-        for permitionRole in jsonData['rolePermitions']:
-            query_role_permition = '''
-                INSERT INTO settings_role_permitions (id_rol, id_permition)
-                VALUES(%s,%s);
-            '''            
-            val  =(permitionRole['idRol'], permitionRole['idPermition'])
-            cursor.execute(query_role_permition,val)
+        for eventType in jsonData['eventTypes']:
+            query_rol = ' INSERT INTO event_types (name, description, is_active, crete_at) VALUES (%s, %s, %s, %s);'
+            val = (rol['name'],rol['descrition'],rol['isActive'],rol['createAt'])
+            cursor.execute(query_rol,val)
 
 
-        for fee in jsonData['fees']:
-            query_fee = '''
-                INSERT INTO settings_fees ( name, value, type_fees, title, subtitle, description, type_application, forced, is_active, id_group)
-                VALUES(%s,%s, %s, %s, %s, %s, %s, %s, %s,%s);
-            '''
-            val = (fee['name'], fee['value'], fee['typeFees'], fee['title'], fee['subtitle'], fee['description'], fee['typeApplication'], fee['forced'], fee['isActive'], fee['idGroup'])
-            cursor.execute(query_fee,val)
-
-        for eventClassification in jsonData['eventClasifications']:
-            query_event_clasification = '''
-                INSERT INTO settings_event_classification  name, description, isActive)
-                VALUES(%s,%s,%s);
-            '''
-            val = (eventClassification['name'], eventClassification['description'], eventClassification['isActive'])
-            cursor.execute(query_event_clasification,val)
-        
-
-        for ticket in jsonData['tickets']:
-            query_ticket = '''
-                INSERT INTO settings_tickets (name, description, path, id_enclosure, available_seats, isActive, id_section)
-                VALUES(%s, %s, %s, %s, %s, %s, %s);
-            '''
-            val = (ticket['name'], ticket['descrition'], ticket['path'], ticket['idEnclosure'], ticket['availableSeats'], ticket['isActive'], ticket['idSection'])
-            cursor.execute(query_ticket,val) """
     cnx.commit()
     cursor.close()
     cnx.close()

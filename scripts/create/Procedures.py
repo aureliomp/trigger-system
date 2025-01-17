@@ -103,7 +103,24 @@ async def create(nameNewDatabase):
         BEGIN
             SET @id =idEvent;
             SET @enclouse = (SELECT e.id_enclosure FROM events e WHERE e.id_event = @id);
-
+            SET @seatsOccupied = ( 
+                SELECT 
+                    COUNT(ert.id_row) AS totalTables
+                FROM  event_reservations_tickets ert 
+                LEFT JOIN event_reservations er ON er.id_reservation = ert.id_reservation 
+                WHERE ert.id_event = @id AND er.status IN ('PAID','IN PAYMENT PROCESS') 
+            );
+            SET @aviliableSeats = (
+                    SELECT 
+                        COUNT(er.id_row) AS totalSeats
+                    FROM  enclosure_row er
+                    LEFT JOIN enclosure_chunk ec ON ec.id_chunk = er.id_chunk 
+                    LEFT JOIN enclosure_section es ON es.id_section = ec.id_section 
+                    LEFT JOIN settings_enclosure se ON se.id_enclosure = es.id_enclosure 
+                    LEFT JOIN events e  ON e.id_enclosure = se.id_enclosure
+                    WHERE e.id_event = @id
+            );
+            SET @isSoldOut = FALSE;
             ### general data 
             SELECT 
             e.id_event AS id,
@@ -141,101 +158,108 @@ async def create(nameNewDatabase):
             LEFT JOIN event_types et ON et.id_type = e.id_type_event
             WHERE  e.id_event = @id AND m.name = 'Flayer';
 
-            ### get coupons
-                SELECT 
-                    ec.id_coupon AS id,
-                    ec.type_coupon AS typeCounpon,
-                    ec.key_word,
-                    ec.value ,
-                    ec.amount_coupon AS amountCoupon,
-                    IFNULL(ec.start_date,'')  AS startDate,
-                    IFNULL(ec.end_date,'')  AS endDate
-                FROM event_coupons ec
-                WHERE ec.id_event = @id;
 
-            ### ticket paid 
-                SELECT 
-                    st.id_ticket AS idTicket,
-                    st.name ,
-                    et.price,
-                    es.class_name AS className
-                FROM  settings_tickets st   
-                INNER JOIN event_ticket et ON  et.id_ticket  = st.id_ticket
-                INNER JOIN enclosure_section es ON es.id_section = st.id_section 
-                WHERE st.id_enclosure = @enclouse AND et.id_event = @id
-                ORDER BY et.create_at  ASC ; 
+        ### get coupons
+            SELECT 
+                ec.id_coupon AS id,
+                ec.type_coupon AS typeCounpon,
+                ec.key_word,
+                ec.value ,
+                ec.amount_coupon AS amountCoupon,
+                IFNULL(ec.start_date,'')  AS startDate,
+                IFNULL(ec.end_date,'')  AS endDate
+            FROM event_coupons ec
+            WHERE ec.id_event = @id;
 
-            #### all tickets
+        ### ticket paid 
             SELECT 
                 st.id_ticket AS idTicket,
                 st.name ,
                 et.price,
                 es.class_name AS className
-            FROM  event_ticket et
-            LEFT JOIN settings_tickets st ON st.id_ticket = et.id_ticket 
-            LEFT JOIN enclosure_section es ON es.id_section = st.id_section 
-            WHERE  st.id_enclosure = @enclouse AND et.id_event = @id;
+            FROM  settings_tickets st   
+            INNER JOIN event_ticket et ON  et.id_ticket  = st.id_ticket
+            INNER JOIN enclosure_section es ON es.id_section = st.id_section 
+            WHERE st.id_enclosure = @enclouse AND et.id_event = @id
+            ORDER BY et.create_at  ASC ; 
+
+        #### all tickets
+        SELECT 
+            st.id_ticket AS idTicket,
+            st.name ,
+            et.price,
+            es.class_name AS className
+        FROM  event_ticket et
+        LEFT JOIN settings_tickets st ON st.id_ticket = et.id_ticket 
+        LEFT JOIN enclosure_section es ON es.id_section = st.id_section 
+        WHERE  st.id_enclosure = @enclouse AND et.id_event = @id;
 
 
-            ### event fees 
+        ### event fees 
+        SELECT 
+            ef.id_event_fees  AS id,
+            ef.amount ,
+            ef.apply ,
+            sf.type_fees AS typeFees,
+            sf.title ,
+            sf.subtitle ,
+            sf.description,
+            sf.type_application AS typeApplication,
+            sf.forced AS forced,
+            sfg.name AS groupName
+        FROM  event_fees ef 
+        INNER JOIN settings_fees sf ON sf.id_fees = ef.id_fees 
+        INNER JOIN settings_fees_group sfg ON sfg.id_group = sf.id_group 
+        WHERE sfg.is_active  AND  ef.id_event = @id;
+
+        ### section to get Assistance reservation
+        SELECT 
+            er.id_reservation AS id,
+            IFNULL(
+                (
+                    SELECT CONCAT_WS(' ', c.name, c.lastname, c.lastname_2 ) FROM customer c  WHERE c.id_user = er.fan_id LIMIT 1
+                ), 'INVITADO'
+            )  AS fullName,
+            er.type_ticket AS typeTicket,
+            DATE_FORMAT(er.create_at,'%Y/%m/%d %H:%i') AS  dateTicket,
+            er.total_tickets  AS totalTickets
+        FROM event_reservations er 
+        WHERE  er.id_event = @id AND er.status = 'PAID';
+
+        ### paid  tickets 
             SELECT 
-                ef.id_event_fees  AS id,
-                ef.amount ,
-                ef.apply ,
-                sf.type_fees AS typeFees,
-                sf.title ,
-                sf.subtitle ,
-                sf.description,
-                sf.type_application AS typeApplication,
-                sf.forced AS forced,
-                sfg.name AS groupName
-            FROM  event_fees ef 
-            INNER JOIN settings_fees sf ON sf.id_fees = ef.id_fees 
-            INNER JOIN settings_fees_group sfg ON sfg.id_group = sf.id_group 
-            WHERE sfg.is_active  AND  ef.id_event = @id;
+                er.id_reservation AS idReservation,
+                IFNULL(er.type_payment,'--')  AS typePayment,
+                (SELECT ROUND((er.total),2)) AS amount ,
+                er.status,
+                DATE_FORMAT(er.create_at,'%Y/%m/%d   %H:%i')  AS createAt,
+                'PAGADO'
+            FROM event_reservations er
+            WHERE er.id_event = @id AND er.status = 'PAID';
 
-            ### section to get Assistance reservation
-            SELECT 
-                er.id_reservation AS id,
-                IFNULL(
-                    (
-                        SELECT CONCAT_WS(' ', c.name, c.lastname, c.lastname_2 ) FROM customer c  WHERE c.id_user = er.fan_id LIMIT 1
-                    ), 'INVITADO'
-                )  AS fullName,
-                er.type_ticket AS typeTicket,
-                DATE_FORMAT(er.create_at,'%Y/%m/%d %H:%i') AS  dateTicket,
-                er.total_tickets  AS totalTickets
-            FROM event_reservations er 
-            WHERE  er.id_event = @id AND er.status = 'PAID';
+        ### get presales
+        SELECT 
+            ep.id_pre_sale AS idPresale,
+            DATE_FORMAT(ep.date_start , '%Y-%m-%d') AS startDate ,
+            DATE_FORMAT(ep.date_end , '%Y-%m-%d') AS endDate,
+            ep.name ,
+            ep.is_active AS isActive,
+            epsz.id_zone ,
+            epsz.price ,
+            es.name,
+            es.class_name AS className,
+            st.id_ticket AS idTicket
+        FROM  event_pre_sale ep 
+        INNER JOIN event_pre_sale_zones epsz ON epsz.id_pre_sale = ep.id_pre_sale 
+        INNER JOIN enclosure_section es ON es.id_section = epsz.id_zone 
+        INNER JOIN settings_tickets st ON st.id_section = es.id_section 
+        WHERE ep.id_event = @id AND ep.is_active;
 
-            ### paid  tickets 
-                SELECT 
-                    er.id_reservation AS idReservation,
-                    IFNULL(er.type_payment,'--')  AS typePayment,
-                    (SELECT ROUND((er.total),2)) AS amount ,
-                    er.status,
-                    DATE_FORMAT(er.create_at,'%Y/%m/%d   %H:%i')  AS createAt,
-                    'PAGADO'
-                FROM event_reservations er
-                WHERE er.id_event = @id AND er.status = 'PAID';
-
-            ### get presales
-            SELECT 
-                ep.id_pre_sale AS idPresale,
-                DATE_FORMAT(ep.date_start , '%Y-%m-%d') AS startDate ,
-                DATE_FORMAT(ep.date_end , '%Y-%m-%d') AS endDate,
-                ep.name ,
-                ep.is_active AS isActive,
-                epsz.id_zone ,
-                epsz.price ,
-                es.name,
-                es.class_name AS className,
-                st.id_ticket AS idTicket
-            FROM  event_pre_sale ep 
-            INNER JOIN event_pre_sale_zones epsz ON epsz.id_pre_sale = ep.id_pre_sale 
-            INNER JOIN enclosure_section es ON es.id_section = epsz.id_zone 
-            INNER JOIN settings_tickets st ON st.id_section = es.id_section 
-            WHERE ep.id_event = @id AND ep.is_active;
+        ## var to get ocupated seats
+        IF @seatsOccupied = @aviliableSeats THEN
+            SET @isSoldOut = TRUE;
+        END IF;
+        SELECT @isSoldOut AS isSoldOut;
         
         END; 
     CREATE  PROCEDURE sp_get_event_preview(

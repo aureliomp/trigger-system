@@ -2,7 +2,7 @@
     "enclosures":[
        {
         "name":"Mapa",
-        "url":"https://gallos-fc-bucket.s3.us-east-2.amazonaws.com/enclosure/2/CTM_PRINCIPAL_2.svg",
+        "url":"https://ctm-qa-bucket.s3.us-east-2.amazonaws.com/enclosure/map-ctm.svg",
         "idEnclosure":1
        }
     ]

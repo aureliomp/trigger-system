@@ -592,6 +592,26 @@
             "userType": "ADMIN",
             "idFan": 1
         }
+    ],
+    "eventTypes":[
+        {
+            "name":"Deportivo",
+            "description":" tipo de evento deportivo ",
+            "isActive":true,
+            "createAt":"2024-06-21"
+        },
+        {
+            "name":"Caridad",
+            "description":"tipo de evento a la caridad",
+            "isActive":true,
+            "createAt":"2024-06-21"
+        },
+        {
+            "name":"Cultural",
+            "description":"tipo de evento cultural",
+            "isActive":true,
+            "createAt":"2024-06-21"
+        }
     ]
 }
 
