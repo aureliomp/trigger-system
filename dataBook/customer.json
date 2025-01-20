@@ -1,0 +1,17 @@
+{
+    "customers":[
+        {
+            "name":"INBROPI", 
+            "lastname":"-",
+            "lastname2":"-", 
+            "email":"inbropi@pruebas.com", 
+            "password":"$2a$04$nim2RYXISxS9Se3pjACUpO.LybIAAA8blkeELb0T.Yri3n5zot8ja", 
+            "passwordFirebase":"$2a$04$nim2RYXISxS9Se3pjACUpO.LybIAAA8blkeELb0T.Yri3n5zot8ja", 
+            "isActive":1, 
+            "fanId":1,
+            "isConfirm":1,
+            "isResetPassword":1, 
+            "provider":"EMAIL"
+        }
+    ]
+}

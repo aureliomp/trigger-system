@@ -408,6 +408,7 @@ async def create(nameNewDatabase):
     
 
     CREATE  PROCEDURE sp_get_event_seats_CTM(
+        idEvent INT,
         nameSection  INT
     )
     BEGIN

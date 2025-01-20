@@ -12,7 +12,7 @@ from scripts.create import Procedures
 from scripts.insertions import Media
 from scripts.insertions import Enclosure
 from scripts.insertions import Settings
-
+from scripts.insertions import Customer
 
 from pydantic import  BaseModel
 
@@ -87,9 +87,11 @@ async def data(data: DataBases):
     
 @app.post('/insert-data')
 async def  data(data: DataBases):
+
     await Media.insert(data.name)
     await Enclosure.insertions(data.name)
     await Settings.insertions(data.name)
+    await Customer.insertion(data.name)
     return {"status":True}
     
 # end def
