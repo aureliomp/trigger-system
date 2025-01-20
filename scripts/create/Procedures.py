@@ -103,24 +103,7 @@ async def create(nameNewDatabase):
         BEGIN
             SET @id =idEvent;
             SET @enclouse = (SELECT e.id_enclosure FROM events e WHERE e.id_event = @id);
-            SET @seatsOccupied = ( 
-                SELECT 
-                    COUNT(ert.id_row) AS totalTables
-                FROM  event_reservations_tickets ert 
-                LEFT JOIN event_reservations er ON er.id_reservation = ert.id_reservation 
-                WHERE ert.id_event = @id AND er.status IN ('PAID','IN PAYMENT PROCESS') 
-            );
-            SET @aviliableSeats = (
-                    SELECT 
-                        COUNT(er.id_row) AS totalSeats
-                    FROM  enclosure_row er
-                    LEFT JOIN enclosure_chunk ec ON ec.id_chunk = er.id_chunk 
-                    LEFT JOIN enclosure_section es ON es.id_section = ec.id_section 
-                    LEFT JOIN settings_enclosure se ON se.id_enclosure = es.id_enclosure 
-                    LEFT JOIN events e  ON e.id_enclosure = se.id_enclosure
-                    WHERE e.id_event = @id
-            );
-            SET @isSoldOut = FALSE;
+            
             ### general data 
             SELECT 
             e.id_event AS id,
@@ -138,6 +121,7 @@ async def create(nameNewDatabase):
             sc.id_category AS idClasification,
             sc.name AS clasification,
             m.id_media AS idMedia,
+            e.time_zone_name AS timeZone,
             m.url,
             (SELECT url FROM media WHERE id_event = @id AND name = 'Flayer' ORDER BY id_media DESC LIMIT 1) AS flayerUrl,
             (SELECT id_media FROM media WHERE id_event = @id AND name = 'Flayer' ORDER BY id_media DESC LIMIT 1) AS flayerIdMedia,
@@ -254,14 +238,8 @@ async def create(nameNewDatabase):
         INNER JOIN enclosure_section es ON es.id_section = epsz.id_zone 
         INNER JOIN settings_tickets st ON st.id_section = es.id_section 
         WHERE ep.id_event = @id AND ep.is_active;
-
-        ## var to get ocupated seats
-        IF @seatsOccupied = @aviliableSeats THEN
-            SET @isSoldOut = TRUE;
-        END IF;
-        SELECT @isSoldOut AS isSoldOut;
-        
-        END; 
+    END; 
+    
     CREATE  PROCEDURE sp_get_event_preview(
         idEvent INT
     )

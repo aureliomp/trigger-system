@@ -597,19 +597,19 @@
         {
             "name":"Deportivo",
             "description":" tipo de evento deportivo ",
-            "isActive":true,
+            "isActive":1,
             "createAt":"2024-06-21"
         },
         {
             "name":"Caridad",
             "description":"tipo de evento a la caridad",
-            "isActive":true,
+            "isActive":1,
             "createAt":"2024-06-21"
         },
         {
             "name":"Cultural",
             "description":"tipo de evento cultural",
-            "isActive":true,
+            "isActive":1,
             "createAt":"2024-06-21"
         }
     ]

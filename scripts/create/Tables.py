@@ -21,7 +21,6 @@ SET NAMES utf8mb4;
 /*!40101 SET @OLD_SQL_MODE='NO_AUTO_VALUE_ON_ZERO', SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-
 # Volcado de tabla bill_fiance
 # ------------------------------------------------------------
 
@@ -459,6 +458,7 @@ CREATE TABLE `events` (
   `id_referece` varchar(100) DEFAULT NULL,
   `gateway_name` enum('MERCADO PAGO','PAYPAL') DEFAULT NULL,
   `inbropi_fees` double DEFAULT NULL,
+  `time_zone_name` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id_event`),
   KEY `fk_clasification` (`id_clasification`),
   KEY `fk_enclosure` (`id_enclosure`),

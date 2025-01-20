@@ -68,7 +68,7 @@ async def fillMainTables(nameDataBase):
             cursor.execute(query_stage,val)
         for eventType in jsonData['eventTypes']:
             query_rol = ' INSERT INTO event_types (name, description, is_active, crete_at) VALUES (%s, %s, %s, %s);'
-            val = (rol['name'],rol['descrition'],rol['isActive'],rol['createAt'])
+            val = (eventType['name'],eventType['description'],eventType['isActive'],eventType['createAt'])
             cursor.execute(query_rol,val)
 
 
