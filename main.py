@@ -3,11 +3,10 @@ from typing import Union
 from fastapi import FastAPI
 
 # create database structure  function
-from scripts.create import DataBase
-from scripts.create import DataBase
-from scripts.create import Triggers
-from scripts.create import Tables
-from scripts.create import Procedures
+from scripts.create.database import DataBase
+from scripts.create.database import Triggers
+from scripts.create.database import Tables
+from scripts.create.database import Procedures
 # insert  data into database functions
 from scripts.insertions import Media
 from scripts.insertions import Enclosure

@@ -5,7 +5,7 @@
             "lastname":"-",
             "lastname2":"-", 
             "email":"inbropi@pruebas.com", 
-            "password":"$2a$04$nim2RYXISxS9Se3pjACUpO.LybIAAA8blkeELb0T.Yri3n5zot8ja", 
+            "password":"$2b$10$mR44Y.4R9esGoP3N0P/IzuzOoS6o/coNC6oeONddTbyHSo7u0VBuO", 
             "passwordFirebase":"$2a$04$nim2RYXISxS9Se3pjACUpO.LybIAAA8blkeELb0T.Yri3n5zot8ja", 
             "isActive":1, 
             "fanId":1,
