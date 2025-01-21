@@ -1,45 +1,70 @@
 import boto3
-import config 
+import config as systemC
+from botocore.client import  Config
+import logging
+import json
 
-def hello_s3():
-    """
-    Use the AWS SDK for Python (Boto3) to create an Amazon Simple Storage Service
-    (Amazon S3) client and list the buckets in your account.
-    This example uses the default settings specified in your shared credentials
-    and config files.
-    """
+config =  Config(
+    signature_version = 's3v4'
+) 
 
-    # Create an S3 client.
-    s3_client = boto3.client("s3")
 
-    print("Hello, Amazon S3! Let's list your buckets:")
-
-    # Create a paginator for the list_buckets operation.
-    paginator = s3_client.get_paginator("list_buckets")
-
-    # Use the paginator to get a list of all buckets.
-    response_iterator = paginator.paginate(
-        PaginationConfig={
-            "PageSize": 50,  # Adjust PageSize as needed.
-            "StartingToken": None,
-        }
+def createClient():
+    app_config  = systemC.load_info()
+    s3_client = boto3.client('s3',
+                aws_access_key_id = app_config['aws']['id'] ,
+                aws_secret_access_key = app_config['aws']['key'] , 
+                config=config
     )
+    return s3_client
 
-    # Iterate through the pages of the response.
-    buckets_found = False
-    for page in response_iterator:
-        if "Buckets" in page and page["Buckets"]:
-            buckets_found = True
-            for bucket in page["Buckets"]:
-                print(f"\t{bucket['Name']}")
+async def create_buckets(nameBucket):
+    try:
+        s3_client = createClient()
+        s3_client.create_bucket(Bucket=nameBucket)
+        print('se creo la cubeta')
+    except Exception as e:
+        logging.error(e)
+        raise False
 
-    if not buckets_found:
-        print("No buckets found!")
+async  def add_policytu(nameBucket):
+    try:
+        s3 = createClient()
+        #ctm-python
+        #{"Version":"2012-10-17","Statement":[{"Sid":"PublicRead","Effect":"Allow","Principal":"*","Action":["s3:GetObject","s3:GetObjectVersion"],"Resource":"arn:aws:s3:::ctm-script/*"}]}
 
+        bucket_policy = {
+            'Version':'2012-10-17',
+            'Statement':[
+                {
+                    'Sid':'PublicRead',
+                    'Effect':'Allow',
+                    'Principal':'*',
+                    'Action':[
+                        's3:GetObject',
+                        's3:GetObjectVersion'
+                    ],
+                    'Resource':f'arn:aws:s3:::{nameBucket}/*'
+                }]
+            }
+        bucket_policy = json.dumps(bucket_policy)
+        print('bucket_policy',bucket_policy)
+        s3.put_bucket_policy(Bucket=nameBucket, Policy=bucket_policy)
+    except Exception as e:
+        logging.error('add_policytu',e)
+        raise False
+   
 
 async def create(nameBucket):
-    app_config  = config.load_info()
-    print(app_config['mysql']['host'])
-    print('se creo una cubeta',nameBucket)
+    await create_buckets(nameBucket)
+    # await add_policytu(nameBucket)
+    """ 
+        response = s3_client.list_buckets()
+        for bucket in response['Buckets']:
+            print(bucket['Name']) 
+        
+    """
+    
+    # print('se creo una cubeta',nameBucket)
     # hello_s3()
     return True

@@ -18,7 +18,7 @@ POST {{baseUrl}}/structure-media HTTP/1.1
 Content-Type: application/json
 
 {
-    "name":"CTM_SCRIPT_01"
+    "name":"ctm-python"
 }
 
 ### insert database information basic
