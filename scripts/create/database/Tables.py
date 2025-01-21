@@ -4,10 +4,10 @@ import config
 async def create(nameNewDatabase):
     mysqlConector = config.load_info()
     cnx  = mysql.connector.connect(
-        host= mysqlConector['host'] ,
-        user= mysqlConector['user'],
-        port =   mysqlConector['port'],
-        password= mysqlConector['password'],
+        host= mysqlConector['mysql']['host'] ,
+        user= mysqlConector['mysql']['user'],
+        port =   mysqlConector['mysql']['port'],
+        password= mysqlConector['mysql']['password'],
         database=nameNewDatabase
     )
    
@@ -452,7 +452,7 @@ CREATE TABLE `events` (
   `situation` enum('NO PUBLICADO','PUBLICADO','POSPUESTO','CANCELADO') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'NO PUBLICADO',
   `status` enum('ACTIVO','CANCELADO','TERMINADO','GENERADO','PAGADO','EN PROCESO DE PAGO') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT 'GENERADO',
   `share_path` varchar(500) DEFAULT NULL,
-  `post_sale` varchar(250) DEFAULT NULL,
+  `post_sale` varchar(2000) DEFAULT NULL,
   `id_type_event` int DEFAULT NULL,
   `paid_date` date DEFAULT NULL,
   `id_referece` varchar(100) DEFAULT NULL,

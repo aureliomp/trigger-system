@@ -6,20 +6,27 @@ GET {{baseUrl}} HTTP/1.1
 
 
 #### create database structure 
-POST {{baseUrl}}/create-structure HTTP/1.1
+POST {{baseUrl}}/create-structure-database HTTP/1.1
 Content-Type: application/json
 
 {
-    "name":"CTM_SCRIPT"
+    "name":"CTM_SCRIPT_01"
 }
 
-
-### insert database information basic
-POST {{baseUrl}}/insert-data HTTP/1.1
+### 
+POST {{baseUrl}}/structure-media HTTP/1.1
 Content-Type: application/json
 
 {
-    "name":"CTM_SCRIPT"
+    "name":"CTM_SCRIPT_01"
+}
+
+### insert database information basic
+POST {{baseUrl}}/insert-data-database HTTP/1.1
+Content-Type: application/json
+
+{
+    "name":"CTM_SCRIPT_01"
 }
 
 

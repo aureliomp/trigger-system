@@ -6,10 +6,10 @@ import json
 async def fillMainTables(nameDataBase): 
     mysqlConector = config.load_info()
     cnx  = mysql.connector.connect(
-        host= mysqlConector['host'] ,
-        user= mysqlConector['user'],
-        port =   mysqlConector['port'],
-        password= mysqlConector['password'],
+        host= mysqlConector['mysql']['host'],
+        user= mysqlConector['mysql']['user'],
+        port =   mysqlConector['mysql']['port'],
+        password= mysqlConector['mysql']['password'],
         database= nameDataBase
     )   
     cursor = cnx.cursor()
@@ -80,10 +80,10 @@ async def fillMainTables(nameDataBase):
 async  def fillChildTables(nameDataBase):
     mysqlConector = config.load_info()
     cnx  = mysql.connector.connect(
-        host= mysqlConector['host'] ,
-        user= mysqlConector['user'],
-        port =   mysqlConector['port'],
-        password= mysqlConector['password'],
+        host= mysqlConector['mysql']['host'] ,
+        user= mysqlConector['mysql']['user'],
+        port =   mysqlConector['mysql']['port'],
+        password= mysqlConector['mysql']['password'],
         database= nameDataBase
     )   
     cursor = cnx.cursor()

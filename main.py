@@ -7,6 +7,7 @@ from scripts.create.database import DataBase
 from scripts.create.database import Triggers
 from scripts.create.database import Tables
 from scripts.create.database import Procedures
+from scripts.create.aws import Buckets
 # insert  data into database functions
 from scripts.insertions import Media
 from scripts.insertions import Enclosure
@@ -75,7 +76,7 @@ def load_info():
     '''
 }
 
-@app.post('/create-structure')
+@app.post('/create-structure-database')
 async def data(data: DataBases):
     await DataBase.create(data.name)
     await Tables.create(data.name)
@@ -83,10 +84,16 @@ async def data(data: DataBases):
     await Procedures.create(data.name)
     return { 'success': True }
     # return { 'tables':tables }
-    
-@app.post('/insert-data')
-async def  data(data: DataBases):
 
+@app.post('/structure-media')
+async def  media(data: DataBases):
+    await Buckets.create(data.name)
+    return { "success": True }
+    
+# end def    
+
+@app.post('/insert-data-database')
+async def  data(data: DataBases):
     await Media.insert(data.name)
     await Enclosure.insertions(data.name)
     await Settings.insertions(data.name)

@@ -10,10 +10,10 @@ async def create(nameNewDatabase):
     '''
 
     cnx  = mysql.connector.connect(
-      host= mysqlConector['host'] ,
-      user= mysqlConector['user'],
-      port =   mysqlConector['port'],
-      password= mysqlConector['password']
+      host= mysqlConector['mysql']['host'] ,
+      user= mysqlConector['mysql']['user'],
+      port =   mysqlConector['mysql']['port'],
+      password= mysqlConector['mysql']['password']
     )
     cursor = cnx.cursor()
 

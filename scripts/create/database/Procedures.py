@@ -5,10 +5,10 @@ import config
 async def create(nameNewDatabase):
     mysqlConector = config.load_info()
     cnx  = mysql.connector.connect(
-    host= mysqlConector['host'] ,
-    user= mysqlConector['user'],
-    port =   mysqlConector['port'],
-    password= mysqlConector['password'],
+    host= mysqlConector['mysql']['host'] ,
+    user= mysqlConector['mysql']['user'],
+    port =   mysqlConector['mysql']['port'],
+    password= mysqlConector['mysql']['password'],
     database=nameNewDatabase
     )
     cursor = cnx.cursor()
