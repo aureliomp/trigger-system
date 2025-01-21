@@ -22,11 +22,28 @@ async def create_buckets(nameBucket):
     try:
         s3_client = createClient()
         # s3_client.create_bucket(Bucket=nameBucket)
+        publicAccessConfiguration={
+            'BlockPublicAcls': False,
+            'IgnorePublicAcls': False,
+            'BlockPublicPolicy': False,
+            'RestrictPublicBuckets': False
+        }
         region = 'us-west-2'
         location = {'LocationConstraint': region}
-        s3_client.create_bucket(Bucket=nameBucket,
-                                    CreateBucketConfiguration=location)
-        print('se creo la cubeta')
+        acl_permition = 'public-read'
+        s3_client.create_bucket( Bucket=nameBucket,
+                                CreateBucketConfiguration=location
+                            )
+        s3_client.put_bucket_ownership_controls(Bucket=nameBucket,OwnershipControls={
+            'Rules':[
+                {
+                    'ObjectOwnership':'ObjectWriter'
+                }
+            ]
+        })
+        s3_client.put_public_access_block(Bucket=nameBucket,PublicAccessBlockConfiguration=publicAccessConfiguration)
+        s3_client.put_bucket_acl(Bucket=nameBucket,ACL=acl_permition)
+
     except Exception as e:
         logging.error(e)
         raise False
@@ -34,9 +51,6 @@ async def create_buckets(nameBucket):
 async  def add_policytu(nameBucket):
     try:
         s3 = createClient()
-        #ctm-python
-        #{"Version":"2012-10-17","Statement":[{"Sid":"PublicRead","Effect":"Allow","Principal":"*","Action":["s3:GetObject","s3:GetObjectVersion"],"Resource":"arn:aws:s3:::ctm-script/*"}]}
-
         bucket_policy = {
             'Version':'2012-10-17',
             'Statement':[
@@ -52,15 +66,15 @@ async  def add_policytu(nameBucket):
                 }]
             }
         bucket_policy = json.dumps(bucket_policy)
-        print('bucket_policy',bucket_policy)
-        s3.put_bucket_policy(Bucket=nameBucket, Policy=bucket_policy)
+        s3.put_bucket_policy(Bucket=nameBucket, Policy=bucket_policy) 
+       
     except Exception as e:
         logging.error('add_policytu',e)
         raise False
    
 
 async def create(nameBucket):
-    # await create_buckets(nameBucket)
+    await create_buckets(nameBucket)
     await add_policytu(nameBucket)
     """ 
         response = s3_client.list_buckets()
