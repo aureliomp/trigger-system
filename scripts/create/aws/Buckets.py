@@ -31,18 +31,22 @@ async def create_buckets(nameBucket):
         region = 'us-west-2'
         location = {'LocationConstraint': region}
         acl_permition = 'public-read'
-        s3_client.create_bucket( Bucket=nameBucket,
-                                CreateBucketConfiguration=location
-                            )
-        s3_client.put_bucket_ownership_controls(Bucket=nameBucket,OwnershipControls={
+        rules = {
             'Rules':[
                 {
                     'ObjectOwnership':'ObjectWriter'
                 }
             ]
-        })
-        s3_client.put_public_access_block(Bucket=nameBucket,PublicAccessBlockConfiguration=publicAccessConfiguration)
-        s3_client.put_bucket_acl(Bucket=nameBucket,ACL=acl_permition)
+        }
+        s3_client.create_bucket( Bucket=nameBucket,
+                                CreateBucketConfiguration=location
+                            )
+        s3_client.put_bucket_ownership_controls(Bucket=nameBucket,
+                                                OwnershipControls=rules)
+        s3_client.put_public_access_block(Bucket=nameBucket,
+                                          PublicAccessBlockConfiguration=publicAccessConfiguration)
+        s3_client.put_bucket_acl(Bucket=nameBucket,
+                                 ACL=acl_permition)
 
     except Exception as e:
         logging.error(e)
@@ -76,13 +80,4 @@ async  def add_policytu(nameBucket):
 async def create(nameBucket):
     await create_buckets(nameBucket)
     await add_policytu(nameBucket)
-    """ 
-        response = s3_client.list_buckets()
-        for bucket in response['Buckets']:
-            print(bucket['Name']) 
-        
-    """
-    
-    # print('se creo una cubeta',nameBucket)
-    # hello_s3()
     return True
