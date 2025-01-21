@@ -31,6 +31,55 @@ async def create_buckets(nameBucket):
         region = 'us-west-2'
         location = {'LocationConstraint': region}
         acl_permition = 'public-read'
+        cors_rules = {
+            'CORSRules': [
+            {
+                "AllowedHeaders": [
+                    "*"
+                ],
+                "AllowedMethods": [
+                    "PUT",
+                    "POST",
+                    "DELETE",
+                    "GET"
+                ],
+                "AllowedOrigins": [
+                    "https://localhost:8080",
+                    "http://:192.168.68.107:5173/",
+                    "https://soporteinbropi.com/",
+                    "https://soporteinbropi.com/"
+                ],
+                "ExposeHeaders": []
+            },
+            {
+                "AllowedHeaders": [
+                    "*"
+                ],
+                "AllowedMethods": [
+                    "PUT",
+                    "POST",
+                    "DELETE"
+                ],
+                "AllowedOrigins": [
+                    "http://www.example2.com",
+                    "http://:192.168.68.107:5173/",
+                    "https://soporteinbropi.com/",
+                    "https://soporteinbropi.com/"
+                ],
+                "ExposeHeaders": []
+            },
+            {
+                "AllowedHeaders": [],
+                "AllowedMethods": [
+                    "GET"
+                ],
+                "AllowedOrigins": [
+                    "*"
+                ],
+                "ExposeHeaders": []
+            }
+        ],
+        }
         rules = {
             'Rules':[
                 {
@@ -47,7 +96,9 @@ async def create_buckets(nameBucket):
                                           PublicAccessBlockConfiguration=publicAccessConfiguration)
         s3_client.put_bucket_acl(Bucket=nameBucket,
                                  ACL=acl_permition)
-
+        
+        s3_client.put_bucket_cors(Bucket=nameBucket,
+                                  CORSConfiguration=cors_rules)
     except Exception as e:
         logging.error(e)
         raise False
