@@ -21,7 +21,11 @@ def createClient():
 async def create_buckets(nameBucket):
     try:
         s3_client = createClient()
-        s3_client.create_bucket(Bucket=nameBucket)
+        # s3_client.create_bucket(Bucket=nameBucket)
+        region = 'us-west-2'
+        location = {'LocationConstraint': region}
+        s3_client.create_bucket(Bucket=nameBucket,
+                                    CreateBucketConfiguration=location)
         print('se creo la cubeta')
     except Exception as e:
         logging.error(e)
@@ -56,8 +60,8 @@ async  def add_policytu(nameBucket):
    
 
 async def create(nameBucket):
-    await create_buckets(nameBucket)
-    # await add_policytu(nameBucket)
+    # await create_buckets(nameBucket)
+    await add_policytu(nameBucket)
     """ 
         response = s3_client.list_buckets()
         for bucket in response['Buckets']:
