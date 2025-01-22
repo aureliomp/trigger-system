@@ -579,11 +579,11 @@
     "users": [
         {
             "id":1,
-            "name": "pruebas",
-            "lastname": "develop",
+            "name": "inbropi",
+            "lastname": "staff",
             "lastname2": "",
-            "email": "aurelio.murillo@trocut.com",
-            "password": "$2b$10$0ggMzRnEa3gmQPJ9..yXH.ELaMtQFcDbzEWEXPvuIMYVdoEGxwRii",
+            "email": "staff@inbropi.com",
+            "password": "$2b$10$C1Ki0RMyPOLtBDV5z59afulucSjcS.IfEQ0miu.p4YvT5.civWG/O",
             "phoneNumber": 123456789987,
             "idRol": 1,
             "isActive": 1,
@@ -591,6 +591,20 @@
             "isResetPassword": 0,
             "userType": "ADMIN",
             "idFan": 1
+        },{
+            "id":2,
+            "name": "pruebas",
+            "lastname": "develop",
+            "lastname2": "",
+            "email": "inbropi@pruebas.com",
+            "password": "$2b$10$mR44Y.4R9esGoP3N0P/IzuzOoS6o/coNC6oeONddTbyHSo7u0VBuO",
+            "phoneNumber": 523456789910,
+            "idRol": 2,
+            "isActive": 1,
+            "createAt": "2024-01-01",
+            "isResetPassword": 0,
+            "userType": "ADMIN",
+            "idFan": 2
         }
     ],
     "eventTypes":[
