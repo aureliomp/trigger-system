@@ -14,9 +14,13 @@ def load_info():
         id = config['AWS_ACCESS_KEY_ID'],
         key = config['AWS_SECRET_ACCESS_KEY' ]
     )
+    digitalOcean= dict(
+        key = config['DIGITAL_OCEAN_ACCESS_TOKEN'] 
+    )
     env_data = dict()
     env_data['mysql'] = mysql
     env_data['aws'] = aws
+    env_data['digitalOcean'] = digitalOcean
     return  env_data
 
 # https://www.youtube.com/shorts/12eTCTns_B4

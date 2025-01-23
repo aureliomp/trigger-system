@@ -7,7 +7,11 @@ from scripts.create.database import DataBase
 from scripts.create.database import Triggers
 from scripts.create.database import Tables
 from scripts.create.database import Procedures
+#  create bucket structure
 from scripts.create.aws import Buckets
+# create digital ocean structure
+from scripts.create.digitalOcean import Application
+
 # insert  data into database functions
 from scripts.insertions import Media
 from scripts.insertions import Enclosure
@@ -17,7 +21,8 @@ from scripts.insertions import Customer
 from pydantic import  BaseModel
 
 class DataBases(BaseModel):
-    name: str
+    name: str 
+    nameApplication: str
 
 app = FastAPI()
 
@@ -89,8 +94,13 @@ async def data(data: DataBases):
 async def  media(data: DataBases):
     await Buckets.create(data.name)
     return { "success": True }
+
+@app.post('/create-droplet')
+async def digitalOcean(data: DataBases):
+    await Application.create(data)
+    return {"success":True}
     
-# end def    
+# end def
 
 @app.post('/insert-data-database')
 async def  data(data: DataBases):

@@ -2,7 +2,7 @@
     "enclosures":[
        {
         "name":"Mapa",
-        "url":"https://ctm-qa-bucket.s3.us-east-2.amazonaws.com/enclosure/map-ctm.svg",
+        "url":"https://ctm-buket.s3.us-east-2.amazonaws.com/enclosure/map-ctm.svg",
         "idEnclosure":1
        }
     ]
